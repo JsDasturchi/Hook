@@ -6,17 +6,19 @@ const Hook = () => {
   const reducer = (state, { type, payload }) => {
     console.log(type);
     switch (type) {
-      case "bymount":
-        return state + Number(payload);
       case "plus":
-        return state + 1;
+        return { ...state, count: state + 1 };
       case "minus":
-        return state - 1;
+        return { ...state, count: state - 1 };
+      case "bymount":
+        return { ...state, count: state.count + state.amount };
+      case "changeAmount":
+        return { ...state, amount: payload };
       default:
         return state;
     }
   };
-  const [data, dispatch] = useReducer(reducer, 1);
+  const [info, dispatch] = useReducer(reducer, { count: 0, amount: 0 });
 
   const plus = () => setCount(count + 1);
   const minus = () => setCount(count - 1);
@@ -32,12 +34,20 @@ const Hook = () => {
       <button onClick={plus}>+</button>
       <button onClick={minus}>-</button>
       <hr />
-      <h1>Reducer {data}</h1>
+      <h1>Reducer {info.count}</h1>
       <button onClick={() => dispatch({ type: "plus" })}>+</button>
+      <button onClick={() => dispatch({ type: "minus" })}>-</button>
       <button onClick={() => dispatch({ type: "bymount", payload: son })}>
-        {son}
+        {info.amount}
       </button>
-      <select defaultValue={1} onClick={onSelect} name="" id="">
+      <select
+        defaultValue={1}
+        onChange={({ target: { value } }) => {
+          dispatch({ type: "changeAmount", payload: Number(value) });
+        }}
+        name=""
+        id=""
+      >
         <option value={1}>1</option>
         <option value={2}>2</option>
         <option value={3}>3</option>

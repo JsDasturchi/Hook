@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Body } from "./Body";
-import { Navbar } from "./Navbar";
+import { Body } from "../components/Body";
+import { Navbar } from "../components/Navbar";
 
 export const Root = () => {
   const [students, setStudents] = useState([
