@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-
-import Hook from "./Hook";
 import reportWebVitals from "./reportWebVitals";
-import { Root } from "./root/Root";
+import { Root } from "./root";
+import { Store } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Root />
-    <Hook />
+    <Store>
+      <Root />
+    </Store>
   </React.StrictMode>
 );
 
