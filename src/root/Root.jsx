@@ -3,25 +3,17 @@ import { Body } from "../components/Body";
 import { Navbar } from "../components/Navbar";
 
 export const Root = () => {
-  const [students, setStudents] = useState([
-    { id: 1, name: "Dostonbek", status: "va" },
-    { id: 2, name: "Avazbek", status: "ab" },
-    { id: 3, name: "Laziz", status: "al" },
-    { id: 4, name: "Kamol", status: "ak" },
-    { id: 5, name: "Nodir", status: "an" },
-    { id: 6, name: "Olim", status: "ao" },
-  ]);
+  const [data, setData] = useState([]);
 
-  const onDelete = (id) => {
-    console.log(id);
-    let res = students.filter((value) => value.id !== id);
-    setStudents(res);
+  const getData = (info) => {
+    setData(info);
+    console.log(info, "info");
   };
 
   return (
     <div>
-      <Navbar students={students} />
-      <Body students={students} onDelete={onDelete} />
+      <Navbar students={data} />
+      <Body getData={getData} />
     </div>
   );
 };

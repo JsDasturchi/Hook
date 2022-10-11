@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { data } from "./Mock";
 import { Wrapper } from "./style";
-export const Body = ({ students, onDelete }) => {
-  // const [st, setSt] = useState(data || []);
+export const Body = ({ getData }) => {
+  const [st, setSt] = useState(data || []);
 
+  useEffect(() => {
+    getData(st);
+  }, [st]);
+
+  const onDelete = (id) => {
+    console.log(id);
+    let res = st.filter((value) => value.id !== id);
+    setSt(res);
+  };
   return (
     <Wrapper>
-      {students.map((value) => {
+      {st.map((value) => {
         return (
           <div key={value.id}>
             {value.id}
